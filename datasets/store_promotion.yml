@@ -82,15 +82,11 @@ columns:
     data_type: int
   - name: ss_store_sk
     data_type: int
-  - name: ss_ticket_numeric
-    data_type: int
   - name: ss_wholesale_cost
     data_type: decimal(7,2)
+  - name: ss_ticket_number
+    data_type: long
 connection_id: Connection - TPCDS
-sql: "SELECT p.*, ss.* 
-      FROM atscale_tutorial_data.tpcds.promotion p
-      INNER JOIN atscale_tutorial_data.tpcds.store_sales ss
-      ON ss.ss_promo_sk = p.p_promo_sk"
 dialects:
   - dialect: Snowflake
     sql: |-
@@ -99,7 +95,10 @@ dialects:
       INNER JOIN "atscale_tutorial_data"."tpcds"."store_sales" ss
       ON ss."ss_promo_sk" = p."p_promo_sk"
   - dialect: BigQuery
-    sql: "SELECT p.*, ss.* 
-      FROM atscale-tutorial-data.tpcds.promotion p
-      INNER JOIN atscale-tutorial-data.tpcds.store_sales ss
-      ON ss.ss_promo_sk = p.p_promo_sk"
+    sql: >-
+      SELECT p.*, ss.*  FROM atscale-tutorial-data.tpcds.promotion p INNER JOIN
+      atscale-tutorial-data.tpcds.store_sales ss ON ss.ss_promo_sk =
+      p.p_promo_sk
+sql: >-
+  SELECT p.*, ss.*  FROM tpcds_10t.tpcds10t.promotion p INNER JOIN
+  tpcds_10t.tpcds10t.store_sales ss ON ss.ss_promo_sk = p.p_promo_sk
